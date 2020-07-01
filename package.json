@@ -1,8 +1,11 @@
 {
-  "name": "create-link-fn",
+  "name": "get-total-commission-fn",
   "version": "1.0.0",
   "description": "## Usage",
   "author": "GoldCoders",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "google-spreadsheet": "^3.0.11"
+  }
 }
