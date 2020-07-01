@@ -15,12 +15,31 @@ if (!GOOGLE_PRIVATE_KEY) throw new Error("No GOOGLE_PRIVATE_KEY env var set");
 if (!GOOGLE_SPREADSHEET_ID_FROM_URL)
   throw new Error("No GOOGLE_SPREADSHEET_ID_FROM_URL env var set");
 
-exports.handler = async (event, context, callback) => {
+exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
       body: JSON.stringify({ error: "Method Not Allowed!" }),
       headers: { Allow: "POST" },
+    };
+  }
+
+  let validationError = [];
+
+  const { referral_code = null } = JSON.parse(event.body);
+
+  if (!referral_code) {
+    let error = {
+      field: "referral_code",
+      message: "No Refferal Code Submitted",
+    };
+    validationError.push(error);
+  }
+
+  if (validationError.length > 0) {
+    return {
+      statusCode: 422,
+      body: JSON.stringify({ errors: validationError }),
     };
   }
 
@@ -34,30 +53,11 @@ exports.handler = async (event, context, callback) => {
 
     await doc.loadInfo();
 
-    const sheet = doc.sheetsByIndex[1];
+    const referral_sheet = doc.sheetsById[2];
 
-    const { referral_code = null } = JSON.parse(event.body);
+    const rows = await referral_sheet.getRows();
 
-    let validationError = [];
-
-    if (!referral_code) {
-      let error = {
-        field: "referral_code",
-        message: "No Refferal Code Submitted, *referral_code* is required",
-      };
-      validationError.push(error);
-    }
-
-    if (validationError.length > 0) {
-      return {
-        statusCode: 422,
-        body: JSON.stringify({ errors: validationError }),
-      };
-    }
-
-    const rows = await sheet.getRows();
-
-    sheet.loadHeaderRow();
+    referral_sheet.loadHeaderRow();
 
     const rowIndex = rows.findIndex((x) => x.referral_code == referral_code);
 
