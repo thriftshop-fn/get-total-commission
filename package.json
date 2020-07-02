@@ -1,7 +1,7 @@
 {
   "name": "get-total-commission-fn",
   "version": "1.0.0",
-  "description": "## Usage",
+  "description": "Get Total Commission",
   "author": "GoldCoders",
   "license": "ISC",
   "dependencies": {
