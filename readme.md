@@ -89,6 +89,17 @@ https://docs.google.com/spreadsheets/d/COPY-THIS-URL-SEGMENT/edit#gid=0
 }
 ```
 
+> **Response **
+
+```json
+{
+    "total_commission": 1000,
+    "payable_commission": 900
+}
+```
+
+- note: payable commission are referral commission that can be **withdrawable to paymongo**.
+
 
 ## Deploy
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/thriftshop-fn/get-total-commission)
