@@ -72,8 +72,8 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        total_commission: rows[rowIndex].total_commission,
-        payable_commission: rows[rowIndex].payable_commission,
+        commission: rows[rowIndex].commission,
+        withdrawable: rows[rowIndex].withdrawable,
       }),
     };
   } catch (e) {

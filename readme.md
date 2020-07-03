@@ -93,8 +93,8 @@ https://docs.google.com/spreadsheets/d/COPY-THIS-URL-SEGMENT/edit#gid=0
 
 ```json
 {
-    "total_commission": 1000,
-    "payable_commission": 900
+    "commission": 1000,
+    "withdrawable": 900
 }
 ```
 
